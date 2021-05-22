@@ -1,5 +1,6 @@
-import com.training.UserValidationService;
-import lombok.extern.slf4j.Slf4j;
+package com.training.jee;
+
+import com.training.login.UserValidationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +17,6 @@ import java.io.IOException;
  *
  * Web Server responds with Http Response
  */
-@Slf4j
 @WebServlet(urlPatterns = "/login.do")
 public class LoginServlet extends HttpServlet {
 

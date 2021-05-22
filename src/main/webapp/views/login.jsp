@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<form action="login.do" method="post">
+<form action="/login" method="post"> <%--action="login.do" for JEE--%>
     Enter your name:
     <label>
         <input type="text" name="name"/>
