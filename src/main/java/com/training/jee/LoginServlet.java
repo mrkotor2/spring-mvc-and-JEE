@@ -1,6 +1,6 @@
 package com.training.jee;
 
-import com.training.login.UserValidationService;
+import com.training.login.LoginService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/login.do")
 public class LoginServlet extends HttpServlet {
 
-    private final UserValidationService userValidationService = new UserValidationService();
+    private final LoginService loginService = new LoginService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
-        if (userValidationService.isUserValid(name, password)) {
+        if (loginService.isUserValid(name, password)) {
             request.setAttribute("name", name);
             request.setAttribute("password", password);
             request.getRequestDispatcher("views/welcome.jsp").forward(request, response);
