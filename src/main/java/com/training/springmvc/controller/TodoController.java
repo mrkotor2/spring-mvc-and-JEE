@@ -41,4 +41,10 @@ public class TodoController {
         model.clear();// to prevent request parameter "name" to be passed
         return "redirect:/list-todo";
     }
+
+    @RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
+    public String deleteTodo( @RequestParam int id) {
+        todoService.deleteTodo(id);
+        return "redirect:/list-todo";
+    }
 }
