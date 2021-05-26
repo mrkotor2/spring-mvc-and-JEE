@@ -3,6 +3,7 @@ package com.training.springmvc;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,7 +13,10 @@ public class Todo {
 
     private int id;
     private String user;
+
+    @Size(min = 5, message = "Enter at least 5 Characters.")
     private String description;
+
     private Date targetDate;
     private boolean isDone;
 
@@ -22,6 +26,10 @@ public class Todo {
         this.description = description;
         this.targetDate = targetDate;
         this.isDone = isDone;
+    }
+
+    public Todo() {
+        super();
     }
 
     public boolean isDone() {
