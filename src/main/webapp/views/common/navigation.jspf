@@ -6,18 +6,22 @@
 
     <div class="navbar-collapse">
         <ul class="nav navbar-nav">
-
-            <li class="nav-item ${pagina.endsWith('/login') ? 'active' : ''}">
-                <a class="nav-link" href="${ctx}/login">Login</a>
+            <li class="nav-item ${pagina.endsWith('/') ? 'active' : ''}">
+                <a class="nav-link" href="${ctx}/">Home</a>
             </li>
             <li class="nav-item ${pagina.endsWith('/list-todo') ? 'active' : ''}">
                 <a class="nav-link" href="${ctx}/list-todo">Todo List</a>
             </li>
+        </ul>
 
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </div>
 
 </nav>
 <style>
     <%@include file="/resources/css/style.css" %>
+    <%-- @TODO Configure this--%>
+
 </style>

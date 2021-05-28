@@ -5,6 +5,8 @@ import com.training.springmvc.TodoService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -35,8 +37,8 @@ public class TodoController {
     }
 
     @RequestMapping(value = "/list-todo", method = RequestMethod.GET)
-    public String retrieveTodo(ModelMap model) {
-        String name = (String) model.get("name");
+    public String showTodoList(ModelMap model) {
+        String name = getLoggedInUserName();
         model.addAttribute("todoList", todoService.retrieveTodoList(name));
         return "list-todo";
     }
@@ -59,10 +61,10 @@ public class TodoController {
 //            model.addAttribute("description",  todo.getDescription());
             return "todo";
         }
-        String username = (String) model.getAttribute("name");
+        String name = getLoggedInUserName();
         model.addAttribute("command", todo);
 
-        todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), false);
+        todoService.addTodo(name, todo.getDescription(), todo.getTargetDate(), false);
         log.info("Todo " + todo + " was added successfully");
         model.clear();// to prevent request parameter "name" to be passed
         return "redirect:/list-todo";
@@ -100,6 +102,16 @@ public class TodoController {
         log.info("Todo with id" + id + " was removed successfully");
 
         return "redirect:/list-todo";
+    }
+
+    private String getLoggedInUserName() { //@TODO remove duplicate
+        Object principal = SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails)
+            return ((UserDetails) principal).getUsername();
+
+        return principal.toString();
     }
 
 

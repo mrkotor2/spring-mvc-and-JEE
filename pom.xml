@@ -25,6 +25,18 @@
             <version>5.3.6</version>
         </dependency>
 
+        <!--        Spring Security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.4.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.4.5</version>
+        </dependency>
+
         <!--        front-->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -109,8 +121,8 @@
                         <container>
                             <containerId>tomcat9x</containerId>
                             <type>embedded</type>
-<!--                            <path>/</path>-->
-<!--                            <contextReloadable>true</contextReloadable>-->
+                            <!--                            <path>/</path>-->
+                            <!--                            <contextReloadable>true</contextReloadable>-->
                         </container>
                         <configuration>
                             <properties>
