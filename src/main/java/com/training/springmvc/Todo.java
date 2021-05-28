@@ -58,7 +58,7 @@ public class Todo {
         return "Todo{" +
                 "id=" + id +
                 ", user='" + user + '\'' +
-                ", desc='" + description + '\'' +
+                ", description='" + description + '\'' +
                 ", targetDate=" + targetDate +
                 ", isDone=" + isDone +
                 '}';

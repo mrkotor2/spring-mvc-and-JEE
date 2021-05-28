@@ -4,12 +4,15 @@ import com.training.springmvc.Todo;
 import com.training.springmvc.TodoService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Log4j
@@ -22,6 +25,13 @@ public class TodoController {
     @Autowired
     public TodoController(TodoService todoService) {
         this.todoService = todoService;
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(
+                dateFormat, false));
     }
 
     @RequestMapping(value = "/list-todo", method = RequestMethod.GET)
@@ -52,7 +62,8 @@ public class TodoController {
         String username = (String) model.getAttribute("name");
         model.addAttribute("command", todo);
 
-        todoService.addTodo(username, todo.getDescription(), new Date(), false);
+        todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), false);
+        log.info("Todo " + todo + " was added successfully");
         model.clear();// to prevent request parameter "name" to be passed
         return "redirect:/list-todo";
     }
@@ -77,6 +88,8 @@ public class TodoController {
         model.addAttribute("command", todo);
         todo.setUser(username);                         //@TODO fix hardcoding
         todoService.updateTodo(todo);
+        log.info("Todo " + todo + " was updated successfully");
+
         model.clear();// to prevent request parameter "name" to be passed
         return "redirect:/list-todo";
     }
@@ -84,6 +97,10 @@ public class TodoController {
     @RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
     public String deleteTodo(@RequestParam int id) {
         todoService.deleteTodo(id);
+        log.info("Todo with id" + id + " was removed successfully");
+
         return "redirect:/list-todo";
     }
+
+
 }
