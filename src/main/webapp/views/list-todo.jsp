@@ -4,6 +4,7 @@
 <H1>Your Todo List</H1>
 <div class="container">
     <table class="table table-striped">
+        <caption><spring:message code="todo.caption" /></caption>
         <thead>
         <tr>
             <th>Description</th>

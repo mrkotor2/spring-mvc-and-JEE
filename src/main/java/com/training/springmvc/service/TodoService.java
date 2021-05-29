@@ -1,5 +1,6 @@
-package com.training.springmvc;
+package com.training.springmvc.service;
 
+import com.training.model.Todo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

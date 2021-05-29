@@ -1,4 +1,4 @@
-package com.training.springmvc;
+package com.training.model;
 
 import lombok.Getter;
 import lombok.Setter;

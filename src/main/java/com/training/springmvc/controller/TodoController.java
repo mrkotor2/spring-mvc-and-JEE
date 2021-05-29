@@ -1,7 +1,7 @@
 package com.training.springmvc.controller;
 
-import com.training.springmvc.Todo;
-import com.training.springmvc.TodoService;
+import com.training.model.Todo;
+import com.training.springmvc.service.TodoService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
